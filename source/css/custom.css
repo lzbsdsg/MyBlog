@@ -762,8 +762,8 @@ a:hover { color: #1a4a7c; }
 
 /* 顶部大图 */
 #page-header {
-  background-attachment: fixed !important;
   background-size: cover !important;
+  background-position: center center !important;
 }
 
 #page-header::before {

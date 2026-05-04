@@ -28,19 +28,50 @@
     el.style.backgroundRepeat = 'no-repeat';
   }
 
+  // 预加载图片，加载完成后再应用（避免跳动）
+  function setBgPreload(el, img) {
+    if (!el) return;
+    var tester = new Image();
+    tester.onload = function () {
+      el.style.backgroundImage = 'url(' + img + ')';
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center center';
+      el.style.backgroundRepeat = 'no-repeat';
+    };
+    tester.src = img;
+  }
+
+  // ---- 路径哈希（确定性，同一路径永远同图） ----
+  function hashPath(path) {
+    var hash = 0;
+    for (var i = 0; i < path.length; i++) {
+      hash = ((hash << 5) - hash + path.charCodeAt(i)) | 0;
+    }
+    return Math.abs(hash);
+  }
+
   // ---- 全站背景 / 大图 / 页脚 ----
   function applyGlobalBackground() {
-    const img = getBackgroundImage();
-    setBg(document.getElementById('web_bg'), img);
-    const header = document.getElementById('page-header');
-    if (header && header.classList.contains('full_page')) {
-      setBg(header, img);
-      header.style.backgroundAttachment = 'fixed';
-    }
-    setBg(document.getElementById('footer'), img);
-    // 404 页面背景
-    const errorBg = document.querySelector('#error-wrap');
-    if (errorBg) setBg(errorBg, img);
+    var globalImg = getBackgroundImage();
+    // 全站背景 / 页脚 / 404 使用统一的全站背景
+    setBg(document.getElementById('web_bg'), globalImg);
+    setBg(document.getElementById('footer'), globalImg);
+    var errorBg = document.querySelector('#error-wrap');
+    if (errorBg) setBg(errorBg, globalImg);
+
+    // 页面 header：根据当前路径选取独立随机图
+    var header = document.getElementById('page-header');
+    if (!header || !IMG_POOL.length) return;
+
+    var path = window.location.pathname;
+    var seed = hashPath(path);
+    var img = pickImage(seed);
+
+    // 首页大图使用全站背景（与 web_bg 一致）
+    var targetImg = header.classList.contains('full_page') ? globalImg : img;
+
+    // 预加载完成后再替换（避免跳动）
+    setBgPreload(header, targetImg);
   }
 
   // ---- 错误图片随机 ----
@@ -51,68 +82,44 @@
     });
   }
 
-  // ---- 文章卡片随机背景（与全站背景使用不同种子） ----
+  // ---- 文章卡片随机背景（与详情页 header 共用路径哈希） ----
   function applyCardBackgrounds() {
     var cards = document.querySelectorAll('#recent-posts .recent-post-item');
     if (!cards.length || !IMG_POOL.length) return;
 
-    // 使用页面路径哈希作为种子，与全站 daySeed 完全独立
-    function hashPath(path) {
-      var hash = 0;
-      for (var i = 0; i < path.length; i++) {
-        hash = ((hash << 5) - hash + path.charCodeAt(i)) | 0;
-      }
-      return Math.abs(hash);
-    }
-
-    // 预生成一组不重复的随机索引
-    function shuffleIndices(count) {
-      var indices = [];
-      for (var i = 0; i < IMG_POOL.length; i++) indices.push(i);
-      // Fisher-Yates 洗牌
-      for (var j = indices.length - 1; j > 0; j--) {
-        var k = ((count * 2654435761 + j * 340573) >>> 0) % (j + 1);
-        var tmp = indices[j];
-        indices[j] = indices[k];
-        indices[k] = tmp;
-      }
-      return indices.slice(0, count);
-    }
-
-    var shuffled = shuffleIndices(cards.length);
-
-    cards.forEach(function (card, i) {
+    cards.forEach(function (card) {
       var coverEl = card.querySelector('.post_cover');
       var imgEl = card.querySelector('.post_cover img.post-bg');
 
+      // 从卡片链接中提取文章路径
+      var linkEl = card.querySelector('.article-title') || card.querySelector('a[href]');
+      var path = linkEl ? linkEl.getAttribute('href') : '';
+      var seed = hashPath(path);
+      var imgUrl = pickImage(seed);
+
       if (imgEl) {
-        // 有封面图片：确保 CSS 全覆盖
+        // 有封面图片：替换为路径哈希对应的图（与详情页一致）
+        imgEl.src = imgUrl;
         imgEl.style.width = '100%';
         imgEl.style.height = '100%';
         imgEl.style.objectFit = 'cover';
-      } else {
-        // 无封面：从图片池随机选取（使用独立种子）
-        var idx = shuffled[i % shuffled.length];
-        var imgUrl = '/images/' + IMG_POOL[idx];
-
-        if (coverEl) {
-          // 有 .post_cover 但里面是 div（颜色背景），替换为图片
-          var divBg = coverEl.querySelector('div.post-bg');
-          if (divBg) {
-            divBg.style.backgroundImage = 'url(' + imgUrl + ')';
-            divBg.style.backgroundSize = 'cover';
-            divBg.style.backgroundPosition = 'center';
-            divBg.style.width = '100%';
-            divBg.style.height = '100%';
-          }
-        } else {
-          // 完全没有 .post_cover，直接给卡片加背景
-          card.style.backgroundImage = 'url(' + imgUrl + ')';
-          card.style.backgroundSize = 'cover';
-          card.style.backgroundPosition = 'center';
-          card.style.backgroundRepeat = 'no-repeat';
-          card.classList.add('no-cover-bg');
+      } else if (coverEl) {
+        // 有 .post_cover 但里面是 div（颜色背景），替换为图片
+        var divBg = coverEl.querySelector('div.post-bg');
+        if (divBg) {
+          divBg.style.backgroundImage = 'url(' + imgUrl + ')';
+          divBg.style.backgroundSize = 'cover';
+          divBg.style.backgroundPosition = 'center';
+          divBg.style.width = '100%';
+          divBg.style.height = '100%';
         }
+      } else {
+        // 完全没有 .post_cover，直接给卡片加背景
+        card.style.backgroundImage = 'url(' + imgUrl + ')';
+        card.style.backgroundSize = 'cover';
+        card.style.backgroundPosition = 'center';
+        card.style.backgroundRepeat = 'no-repeat';
+        card.classList.add('no-cover-bg');
       }
     });
   }
@@ -202,6 +209,7 @@
   // PJAX 导航后重新应用
   document.addEventListener('pjax:complete', function () {
     if (IMG_POOL.length) {
+      applyGlobalBackground();
       applyCardBackgrounds();
       initCardAnimation();
     }
