@@ -27,8 +27,8 @@ top_img: https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=8
 
 ## 联系方式
 
-- **GitHub**: [GitHub](https://github.com)
-- **Email**: hello@example.com
+- **GitHub**: [lzbsdsg](https://github.com/lzbsdsg)
+- **Email**: [lzb05101115@gmail.com](mailto:lzb05101115@gmail.com)
 
 ## 关于本站
 

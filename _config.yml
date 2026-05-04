@@ -6,7 +6,7 @@ title: lzb's Blog
 subtitle: 记录生活与技术的点滴
 description: 一个精美的个人博客，分享技术、生活与思考
 keywords: blog, 技术, 生活
-author: Blogger
+author: lzb
 language:
   - zh-CN
   - en
@@ -14,7 +14,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://my-blog.vercel.app
+url: https://lzbsdsg.space
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

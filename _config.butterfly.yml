@@ -61,20 +61,10 @@ error_404:
 
 subtitle:
   enable: true
-  effect: true
-  typed_option:
-    typeSpeed: 100
-    backSpeed: 20
-    startDelay: 500
-    backDelay: 1500
-    loop: true
-    showCursor: true
-  source: 1
+  effect: false
+  source: 0
   sub:
-    - '探索技术与生活的美好'
-    - '代码改变世界'
-    - '保持好奇，持续学习'
-    - '用文字记录成长'
+    - 'The only way to do great work is to love what you do'
 
 # 文章布局：左右交替封面
 index_layout: 3
@@ -135,8 +125,8 @@ menu:
 # --------------------------------------
 
 social:
-  fab fa-github: https://github.com ||Github
-  fas fa-envelope: mailto:hello@example.com ||Email
+  fab fa-github: https://github.com/lzbsdsg ||Github
+  fas fa-envelope: mailto:lzb05101115@gmail.com ||Email
 
 # --------------------------------------
 # Sidebar
@@ -161,7 +151,7 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com
+      link: https://github.com/lzbsdsg
   card_announcement:
     enable: true
     content: 欢迎来到我的博客！这里记录技术学习与生活感悟。
@@ -192,6 +182,11 @@ aside:
   card_webinfo:
     enable: true
     post_count: true
+    runtime_date: 2026-05-04
+    runtime_unit: 天
+    site_wordcount: true
+    site_uv: true
+    site_pv: true
     last_push_date: true
     sort_order:
 
@@ -281,7 +276,7 @@ fireworks:
   enable: false
   zIndex: 9999
   mobile: false
-
+ 
 click_heart:
   enable: false
   mobile: false

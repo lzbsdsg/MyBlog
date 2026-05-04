@@ -74,6 +74,39 @@
     setBgPreload(header, targetImg);
   }
 
+  // ---- 上一篇/下一篇封面背景（与卡片一致） ----
+  function applyPaginationCovers() {
+    var navs = document.querySelectorAll('.pagination-related');
+    if (!navs.length || !IMG_POOL.length) return;
+
+    navs.forEach(function (nav) {
+      var link = nav.getAttribute('href') || '';
+      var seed = hashPath(link);
+      var imgUrl = pickImage(seed);
+
+      var imgCover = nav.querySelector('img.cover');
+      var divCover = nav.querySelector('div.cover');
+
+      if (imgCover) {
+        imgCover.src = imgUrl;
+        imgCover.style.objectFit = 'cover';
+        imgCover.style.width = '100%';
+        imgCover.style.height = '100%';
+      } else if (divCover) {
+        divCover.style.backgroundImage = 'url(' + imgUrl + ')';
+        divCover.style.backgroundSize = 'cover';
+        divCover.style.backgroundPosition = 'center';
+        divCover.style.width = '100%';
+        divCover.style.height = '100%';
+      } else {
+        // 没有 cover 元素，给整个导航块加背景
+        nav.style.backgroundImage = 'url(' + imgUrl + ')';
+        nav.style.backgroundSize = 'cover';
+        nav.style.backgroundPosition = 'center';
+      }
+    });
+  }
+
   // ---- 错误图片随机 ----
   function applyErrorImages() {
     const imgs = document.querySelectorAll('img[src*="error"], img[src*="friend_404"]');
@@ -128,6 +161,7 @@
   function initWithManifest() {
     applyGlobalBackground();
     applyCardBackgrounds();
+    applyPaginationCovers();
     applyErrorImages();
   }
 
@@ -211,6 +245,7 @@
     if (IMG_POOL.length) {
       applyGlobalBackground();
       applyCardBackgrounds();
+      applyPaginationCovers();
       initCardAnimation();
     }
   });

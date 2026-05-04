@@ -464,6 +464,48 @@ a:hover { color: #1a4a7c; }
   }
 }
 
+/* 上一篇/下一篇导航封面 */
+#pagination.pagination-post {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.pagination-related .cover {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 0 !important;
+  z-index: 0 !important;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.3s !important;
+}
+
+.pagination-related img.cover {
+  display: block !important;
+}
+
+/* 导航文字区域 */
+.pagination-related .info {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.pagination-related .info .info-1 .info-item-1 {
+  color: rgba(255,255,255,0.75) !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.35) !important;
+}
+
+.pagination-related .info .info-1 .info-item-2 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4) !important;
+}
+
+.pagination-related .info .info-2 .info-item-1 {
+  color: rgba(255,255,255,0.85) !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35) !important;
+}
+
 /* 侧边栏所有组件 */
 #aside-content .card-widget {
   background: var(--glass-bg) !important;
