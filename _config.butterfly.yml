@@ -1,0 +1,368 @@
+# Butterfly 主题配置
+
+# --------------------------------------
+# Site Settings
+# --------------------------------------
+
+favicon: /images/picture1.png
+
+avatar:
+  img: /images/picture1.png
+  effect: true
+
+# --------------------------------------
+# Banner / Top Image
+# --------------------------------------
+
+disable_top_img: false
+
+# 默认顶部大图
+default_top_img: /images/picture1.png
+
+# 首页顶部大图
+index_img: /images/picture1.png
+
+# 归档页顶部大图
+archive_img: /images/picture1.png
+
+# 标签页顶部大图
+tag_img: /images/picture1.png
+
+# 分类页顶部大图
+category_img: /images/picture1.png
+
+# 页脚背景图
+footer_img: /images/picture1.png
+
+# 全站背景
+background: /images/picture1.png
+
+# 文章封面（已禁用）
+cover:
+  index_enable: false
+  aside_enable: false
+  archives_enable: false
+  default_cover: false
+
+# 报错图片
+error_img:
+  flink: /images/picture1.png
+  post_page: /images/picture1.png
+
+# 404 页面
+error_404:
+  enable: true
+  subtitle: '页面走丢了~'
+  background: /images/picture1.png
+
+# --------------------------------------
+# Index Page
+# --------------------------------------
+
+subtitle:
+  enable: true
+  effect: true
+  typed_option:
+    typeSpeed: 100
+    backSpeed: 20
+    startDelay: 500
+    backDelay: 1500
+    loop: true
+    showCursor: true
+  source: 1
+  sub:
+    - '探索技术与生活的美好'
+    - '代码改变世界'
+    - '保持好奇，持续学习'
+    - '用文字记录成长'
+
+# 文章布局：左右交替封面
+index_layout: 3
+
+# 文章摘要
+index_post_content:
+  method: 3
+  length: 300
+
+# --------------------------------------
+# Post Settings
+# --------------------------------------
+
+toc:
+  post: true
+  page: false
+  number: true
+  expand: false
+  style_simple: true
+  scroll_percent: true
+
+post_copyright:
+  enable: true
+  decode: false
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+wordcount:
+  enable: true
+  post_wordcount: true
+  min2read: true
+  total_wordcount: true
+
+share:
+  enable: true
+  list:
+    - qq
+    - weibo
+    - wechat
+    - twitter
+    - facebook
+    - link
+
+# --------------------------------------
+# Menu
+# --------------------------------------
+
+menu:
+  首页: / ||fas fa-home
+  归档: /archives/ ||fas fa-archive
+  标签: /tags/ ||fas fa-tags
+  分类: /categories/ ||fas fa-folder-open
+  关于: /about/ ||fas fa-heart
+  知识库: /wiki/ ||fas fa-book
+
+# --------------------------------------
+# Social Settings
+# --------------------------------------
+
+social:
+  fab fa-github: https://github.com ||Github
+  fas fa-envelope: mailto:hello@example.com ||Email
+
+# --------------------------------------
+# Sidebar
+# --------------------------------------
+
+announcement: 欢迎来到我的博客！
+
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true
+  position: left
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description: 探索技术与生活的美好
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com
+  card_announcement:
+    enable: true
+    content: 欢迎来到我的博客！这里记录技术学习与生活感悟。
+  card_recent_post:
+    enable: true
+    limit: 5
+    sort: date
+    sort_order:
+  card_categories:
+    enable: true
+    limit: 8
+    expand: none
+    sort_order:
+  card_tags:
+    enable: true
+    limit: 40
+    color: true
+    orderby: random
+    order: 1
+    sort_order:
+  card_archives:
+    enable: true
+    type: monthly
+    format: MMMM YYYY
+    order: -1
+    limit: 8
+    sort_order:
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+    sort_order:
+
+# --------------------------------------
+# Page Settings
+# --------------------------------------
+
+anchor:
+  auto_update: true
+  click_to_scroll: true
+
+photofigcaption: true
+
+copy:
+  enable: true
+  copyright:
+    enable: true
+    limit_count: 150
+
+readmode: true
+
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: false
+
+rightside_scroll_percent: true
+
+# --------------------------------------
+# UI Settings
+# --------------------------------------
+
+theme_color:
+  enable: true
+  main: "#49b1f5"
+  paginator: "#00c4b6"
+  button_hover: "#FF7242"
+  text_selection: "#00c4b6"
+  link_color: "#99a9bf"
+  meta_color: "#858585"
+  hr_color: "#A4D8FA"
+  code_foreground: "#f47466"
+  code_background: "rgba(27, 31, 35, .05)"
+  toc_color: "#00c4b6"
+  blockquote_padding_color: "#49b1f5"
+  blockquote_background_color: "rgba(73, 177, 245, .1)"
+  scrollbar_color: "#49b1f5"
+  meta_theme_color_light: "#ffffff"
+  meta_theme_color_dark: "#1d1d1d"
+
+font:
+  font-size:
+    code_font_size: 14px
+  font-family:
+    host: "'JetBrains Mono', 'Noto Serif SC', 'HarmonyOS Sans', 'PingFang SC', 'Microsoft YaHei', monospace"
+  blog_title_font:
+    font_link: https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap
+    font-family: "'ZCOOL XiaoWei', 'Noto Serif SC', serif"
+
+# --------------------------------------
+# Tag Plugins
+# --------------------------------------
+
+note:
+  style: flat
+  icons: true
+  border_radius: 12
+
+# --------------------------------------
+# Search
+# --------------------------------------
+
+local_search:
+  enable: true
+  preload: false
+  CDN:
+
+# --------------------------------------
+# Background Effects
+# --------------------------------------
+
+canvas_fluttering_ribbon:
+  enable: true
+  mobile: false
+
+fireworks:
+  enable: false
+  zIndex: 9999
+  mobile: false
+
+click_heart:
+  enable: false
+  mobile: false
+
+clickShowText:
+  enable: false
+
+canvas_ribbon:
+  enable: false
+
+canvas_nest:
+  enable: false
+
+# --------------------------------------
+# Lightbox
+# --------------------------------------
+
+lightbox: fancybox
+
+# --------------------------------------
+# Lazyload
+# --------------------------------------
+
+lazyload:
+  enable: true
+  native: false
+  field: site
+  placeholder:
+  blur: true
+
+# --------------------------------------
+# PJAX
+# --------------------------------------
+
+pjax:
+  enable: true
+  exclude:
+    - /music/
+
+# --------------------------------------
+# Snackbar
+# --------------------------------------
+
+snackbar:
+  enable: true
+  position: bottom-left
+  bg_light: "#49b1f5"
+  bg_dark: "#1f1f1f"
+
+instantpage: true
+
+busuanzi:
+  site_uv: true
+  site_pv: true
+  page_pv: true
+
+# --------------------------------------
+# Comment
+# --------------------------------------
+
+comments:
+  use:
+  text: true
+  lazyload: false
+  card_post_count: false
+
+# --------------------------------------
+# Inject
+# --------------------------------------
+
+inject:
+  head:
+    - '<link rel="stylesheet" href="/css/custom.css">'
+  bottom:
+    - '<script src="/js/custom.js"></script>'
+
+# --------------------------------------
+# CDN
+# --------------------------------------
+
+CDN:
+  internal_provider: local
+  third_party_provider: jsdelivr
+  version: true

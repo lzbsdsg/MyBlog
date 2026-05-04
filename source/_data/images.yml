@@ -1,0 +1,12 @@
+# ============================================
+# 图片集中管理 —— 只改这里，所有地方生效
+# ============================================
+
+# 头像 / 图标（固定）
+avatar: /images/picture1.png
+
+# 404 / 报错图片（fallback）
+error_page: /images/picture1.png
+error_post: /images/picture1.png
+
+# 注意：所有图片已由 JS 从 images/ 文件夹随机选取，每 3 天自动轮换
