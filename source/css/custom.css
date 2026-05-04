@@ -30,17 +30,23 @@
 /* ---- 字体：正文/标题用 JetBrains Mono ---- */
 body {
   font-family: 'JetBrains Mono', 'Noto Serif SC', 'HarmonyOS Sans', 'PingFang SC', 'Microsoft YaHei', monospace;
-  color: #0d0d0d;
+  color: #080808;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'JetBrains Mono', 'Noto Serif SC', 'PingFang SC', monospace;
-  color: #080810;
+  color: #050508;
 }
 code, pre, figure.highlight { font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; }
 
 [data-theme="dark"] body { color: #f0f0f6; }
 [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
 [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 { color: #f8f8ff; }
+
+/* 全局链接对比度增强 */
+a { color: #2563a8; }
+a:hover { color: #1a4a7c; }
+[data-theme="dark"] a { color: #60a5fa; }
+[data-theme="dark"] a:hover { color: #93c5fd; }
 
 /* ---- 首页标题：斜体艺术字 + 渐变 ---- */
 #page-header #site-title,
@@ -80,60 +86,82 @@ code, pre, figure.highlight { font-family: 'JetBrains Mono', 'Fira Code', 'Conso
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* ---- 首页文章卡片标题 ---- */
-#recent-posts .recent-post-item .post-title a {
-  color: #0d0d14 !important;
-  font-weight: 700 !important;
-  transition: color 0.3s ease !important;
+/* ---- 首页文章卡片标题（白色文字 + 阴影增强对比） ---- */
+#recent-posts .recent-post-item .article-title,
+#recent-posts .recent-post-item .article-title a {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 1.55em !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
+  line-height: 1.4 !important;
 }
 
-#recent-posts .recent-post-item:hover .post-title a {
-  color: #2a8ad4 !important;
+#recent-posts .recent-post-item:hover .article-title,
+#recent-posts .recent-post-item:hover .article-title a {
+  color: #e0f0ff !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 20px rgba(73,177,245,0.3) !important;
 }
 
-[data-theme="dark"] #recent-posts .recent-post-item .post-title a {
-  color: #f0f0f6 !important;
-}
-
-[data-theme="dark"] #recent-posts .recent-post-item:hover .post-title a {
-  color: #60a5fa !important;
-}
-
-/* ---- 首页文章摘要 ---- */
+/* ---- 首页文章摘要（白色文字 + 阴影） ---- */
 #recent-posts .recent-post-item .content {
-  color: #2e2e3a !important;
+  color: rgba(255,255,255,0.92) !important;
   font-weight: 500 !important;
   line-height: 1.75 !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4) !important;
+  font-size: 0.9em !important;
 }
 
-[data-theme="dark"] #recent-posts .recent-post-item .content {
-  color: #d4d4e0 !important;
-}
-
-/* ---- 文章卡片日期/分类等 meta 信息 ---- */
+/* ---- 文章卡片日期/分类等 meta 信息（白色半透明） ---- */
 #recent-posts .recent-post-item .post-meta,
 #recent-posts .recent-post-item .article-meta,
-.recent-post-info {
-  color: #5a5a70 !important;
+#recent-posts .recent-post-item .recent-post-info {
+  color: rgba(255,255,255,0.8) !important;
   font-size: 0.82rem !important;
   font-weight: 500 !important;
   letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.35) !important;
 }
 
-[data-theme="dark"] #recent-posts .recent-post-item .post-meta,
-[data-theme="dark"] #recent-posts .recent-post-item .article-meta,
-[data-theme="dark"] .recent-post-info {
-  color: #b0b0c8 !important;
+#recent-posts .recent-post-item .post-meta a,
+#recent-posts .recent-post-item .article-meta a {
+  color: rgba(255,255,255,0.9) !important;
 }
 
-/* ---- 文章详情页标题 ---- */
-#post #post-info .post-title,
+#recent-posts .recent-post-item .post-meta a:hover,
+#recent-posts .recent-post-item .article-meta a:hover {
+  color: #ffffff !important;
+}
+
+#recent-posts .recent-post-item .article-meta-separator {
+  color: rgba(255,255,255,0.4) !important;
+}
+
+/* ---- 文章详情页标题（与卡片风格一致） ---- */
+#post #post-info .post-title {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+
+#post #post-info #post-meta {
+  color: rgba(255,255,255,0.88) !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4) !important;
+}
+
+#post #post-info #post-meta a {
+  color: rgba(255,255,255,0.92) !important;
+}
+
+#post #post-info #post-meta a:hover {
+  color: #ffffff !important;
+}
+
 #post #article-container h1 {
   color: #0a0a12 !important;
   font-weight: 900 !important;
 }
 
-[data-theme="dark"] #post #post-info .post-title,
 [data-theme="dark"] #post #article-container h1 {
   color: #f4f4fa !important;
 }
@@ -161,25 +189,25 @@ code, pre, figure.highlight { font-family: 'JetBrains Mono', 'Fira Code', 'Conso
 }
 
 #article-container h4, #article-container h5, #article-container h6 {
-  color: #3a3a50 !important;
+  color: #2a2a40 !important;
   font-weight: 600 !important;
 }
 
 [data-theme="dark"] #article-container h4,
 [data-theme="dark"] #article-container h5,
 [data-theme="dark"] #article-container h6 {
-  color: #c0c0d8 !important;
+  color: #d8d8e8 !important;
 }
 
-/* ---- 文章正文 ---- */
+/* ---- 文章正文（增强对比） ---- */
 #article-container p {
-  color: #1e1e28 !important;
+  color: #161620 !important;
   line-height: 1.92 !important;
   font-weight: 500 !important;
 }
 
 [data-theme="dark"] #article-container p {
-  color: #e0e0ea !important;
+  color: #eaeaf0 !important;
 }
 
 /* ---- 侧边栏作者名 ---- */
@@ -268,32 +296,34 @@ code, pre, figure.highlight { font-family: 'JetBrains Mono', 'Fira Code', 'Conso
   color: #c084fc !important;
 }
 
-/* ---- 页脚文字 ---- */
+/* ---- 页脚文字（高对比度） ---- */
 #footer #footer-wrap,
 #footer .footer-group,
 #footer .footer-text {
-  color: rgba(255, 255, 255, 0.92) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4) !important;
 }
 
 #footer #footer-wrap a {
-  color: rgba(255, 255, 255, 0.95) !important;
+  color: rgba(255, 255, 255, 0.97) !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4) !important;
 }
 
 #footer #footer-wrap a:hover {
   color: #fff !important;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
 }
 
 /* ---- 公告栏文字 ---- */
 #aside-content .card-announcement .item-content {
-  color: #111118 !important;
+  color: #0a0a12 !important;
   font-style: italic !important;
   font-weight: 600 !important;
   line-height: 1.7 !important;
 }
 
 [data-theme="dark"] #aside-content .card-announcement .item-content {
-  color: #eeeef4 !important;
+  color: #f2f2f8 !important;
 }
 
 /* ---- 背景固定 ---- */
@@ -325,21 +355,113 @@ code, pre, figure.highlight { font-family: 'JetBrains Mono', 'Fira Code', 'Conso
   box-shadow: var(--glass-shadow-hover) !important;
 }
 
-/* 首页文章卡片 */
+/* 首页文章卡片 - 全背景覆盖式 */
 #recent-posts .recent-post-item {
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
-  border: 1px solid var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
+  position: relative !important;
+  display: block !important;
+  height: 22em !important;
   border-radius: 20px !important;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+  box-shadow: var(--glass-shadow) !important;
+  border: 1px solid var(--glass-border) !important;
 }
 
 #recent-posts .recent-post-item:hover {
   transform: translateY(-6px);
   box-shadow: var(--glass-shadow-hover) !important;
+}
+
+/* 卡片背景层 */
+#recent-posts .recent-post-item .post_cover {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+}
+
+#recent-posts .recent-post-item .post_cover a {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#recent-posts .recent-post-item .post_cover .post-bg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 0 !important;
+  z-index: 0 !important;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1) !important;
+}
+
+#recent-posts .recent-post-item:hover .post_cover .post-bg {
+  transform: scale(1.06) !important;
+}
+
+/* 卡片暗色渐变遮罩（与详情页 header 一致） */
+#recent-posts .recent-post-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+/* 卡片内容覆盖层 */
+#recent-posts .recent-post-item .recent-post-info {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  height: 100% !important;
+  width: 100% !important;
+  padding: 1.8em 2em !important;
+  background: transparent !important;
+  border: none !important;
+  box-sizing: border-box !important;
+}
+
+/* 无封面卡片的渐变背景（JS 加载前的 fallback） */
+#recent-posts .recent-post-item.no-cover-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* div.post-bg 替换为背景图时全屏覆盖 */
+#recent-posts .recent-post-item .post_cover div.post-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-size: cover !important;
+  background-position: center !important;
+  border-radius: 0 !important;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  #recent-posts .recent-post-item {
+    height: 18em !important;
+  }
+
+  #recent-posts .recent-post-item .recent-post-info {
+    padding: 1.2em 1.4em !important;
+  }
+
+  #recent-posts .recent-post-item .article-title,
+  #recent-posts .recent-post-item .article-title a {
+    font-size: 1.3em !important;
+  }
+
+  #recent-posts .recent-post-item .content {
+    font-size: 0.82em !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+  }
 }
 
 /* 侧边栏所有组件 */
@@ -572,11 +694,11 @@ code, pre, figure.highlight { font-family: 'JetBrains Mono', 'Fira Code', 'Conso
 }
 
 #aside-content .card-recent-post .aside-list .aside-list-item .content time {
-  color: #555568 !important;
+  color: #3a3a50 !important;
 }
 
 [data-theme="dark"] #aside-content .card-recent-post .aside-list .aside-list-item .content time {
-  color: #a0a0b8 !important;
+  color: #c0c0d8 !important;
 }
 
 /* 分类 */
@@ -596,11 +718,11 @@ code, pre, figure.highlight { font-family: 'JetBrains Mono', 'Fira Code', 'Conso
 }
 
 #aside-content .card-categories ul li .category-list-count {
-  color: #555568 !important;
+  color: #3a3a50 !important;
 }
 
 [data-theme="dark"] #aside-content .card-categories ul li .category-list-count {
-  color: #a0a0b8 !important;
+  color: #c0c0d8 !important;
 }
 
 /* 归档 */

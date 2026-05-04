@@ -51,9 +51,76 @@
     });
   }
 
+  // ---- 文章卡片随机背景（与全站背景使用不同种子） ----
+  function applyCardBackgrounds() {
+    var cards = document.querySelectorAll('#recent-posts .recent-post-item');
+    if (!cards.length || !IMG_POOL.length) return;
+
+    // 使用页面路径哈希作为种子，与全站 daySeed 完全独立
+    function hashPath(path) {
+      var hash = 0;
+      for (var i = 0; i < path.length; i++) {
+        hash = ((hash << 5) - hash + path.charCodeAt(i)) | 0;
+      }
+      return Math.abs(hash);
+    }
+
+    // 预生成一组不重复的随机索引
+    function shuffleIndices(count) {
+      var indices = [];
+      for (var i = 0; i < IMG_POOL.length; i++) indices.push(i);
+      // Fisher-Yates 洗牌
+      for (var j = indices.length - 1; j > 0; j--) {
+        var k = ((count * 2654435761 + j * 340573) >>> 0) % (j + 1);
+        var tmp = indices[j];
+        indices[j] = indices[k];
+        indices[k] = tmp;
+      }
+      return indices.slice(0, count);
+    }
+
+    var shuffled = shuffleIndices(cards.length);
+
+    cards.forEach(function (card, i) {
+      var coverEl = card.querySelector('.post_cover');
+      var imgEl = card.querySelector('.post_cover img.post-bg');
+
+      if (imgEl) {
+        // 有封面图片：确保 CSS 全覆盖
+        imgEl.style.width = '100%';
+        imgEl.style.height = '100%';
+        imgEl.style.objectFit = 'cover';
+      } else {
+        // 无封面：从图片池随机选取（使用独立种子）
+        var idx = shuffled[i % shuffled.length];
+        var imgUrl = '/images/' + IMG_POOL[idx];
+
+        if (coverEl) {
+          // 有 .post_cover 但里面是 div（颜色背景），替换为图片
+          var divBg = coverEl.querySelector('div.post-bg');
+          if (divBg) {
+            divBg.style.backgroundImage = 'url(' + imgUrl + ')';
+            divBg.style.backgroundSize = 'cover';
+            divBg.style.backgroundPosition = 'center';
+            divBg.style.width = '100%';
+            divBg.style.height = '100%';
+          }
+        } else {
+          // 完全没有 .post_cover，直接给卡片加背景
+          card.style.backgroundImage = 'url(' + imgUrl + ')';
+          card.style.backgroundSize = 'cover';
+          card.style.backgroundPosition = 'center';
+          card.style.backgroundRepeat = 'no-repeat';
+          card.classList.add('no-cover-bg');
+        }
+      }
+    });
+  }
+
   // ---- 加载清单后统一应用 ----
   function initWithManifest() {
     applyGlobalBackground();
+    applyCardBackgrounds();
     applyErrorImages();
   }
 
@@ -130,5 +197,13 @@
     initImageFade();
     initCardAnimation();
     initParallax();
+  });
+
+  // PJAX 导航后重新应用
+  document.addEventListener('pjax:complete', function () {
+    if (IMG_POOL.length) {
+      applyCardBackgrounds();
+      initCardAnimation();
+    }
   });
 })();
