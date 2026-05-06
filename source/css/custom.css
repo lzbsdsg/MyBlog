@@ -31,6 +31,7 @@
 body {
   font-family: 'JetBrains Mono', 'Noto Serif SC', 'HarmonyOS Sans', 'PingFang SC', 'Microsoft YaHei', monospace;
   color: #080808;
+  background: transparent !important;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'JetBrains Mono', 'Noto Serif SC', 'PingFang SC', monospace;
@@ -326,8 +327,13 @@ a:hover { color: #1a4a7c; }
   color: #f2f2f8 !important;
 }
 
-/* ---- 背景固定 ---- */
-#web_bg { background-attachment: fixed !important; background-size: cover !important; }
+/* ---- 背景固定 / 初始隐藏（避免旧图闪烁） ---- */
+#web_bg {
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
 
 /* ---- 滚动条 ---- */
 ::-webkit-scrollbar { width: 5px; }
@@ -341,7 +347,7 @@ a:hover { color: #1a4a7c; }
    我们用同等选择器 + !important 覆盖为毛玻璃
    ============================================ */
 
-/* 主内容区（归档/标签/分类/文章等页面的白色背景） */
+/* 主内容区（归档/标签/分类/文章等页面） */
 .layout > div:first-child:not(.nc) {
   background: var(--glass-bg) !important;
   backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
@@ -354,6 +360,7 @@ a:hover { color: #1a4a7c; }
 .layout > div:first-child:not(.nc):hover {
   box-shadow: var(--glass-shadow-hover) !important;
 }
+
 
 /* 首页文章卡片 - 全背景覆盖式 */
 #recent-posts .recent-post-item {
@@ -802,10 +809,12 @@ a:hover { color: #1a4a7c; }
   box-shadow: 0 1px 8px rgba(0,0,0,0.03) !important;
 }
 
-/* 顶部大图 */
+/* 顶部大图（初始隐藏，JS 加载后淡入） */
 #page-header {
   background-size: cover !important;
   background-position: center center !important;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 #page-header::before {
@@ -832,6 +841,8 @@ a:hover { color: #1a4a7c; }
   background: rgba(0,0,0,0.2) !important;
   border-top: 1px solid rgba(255,255,255,0.06) !important;
   margin-top: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 #footer #footer-wrap {
@@ -891,8 +902,8 @@ blockquote {
   -webkit-backdrop-filter: blur(8px) !important;
 }
 
-/* 表格 */
-table {
+/* 表格（排除代码块内部 table） */
+table:not(figure.highlight table) {
   background: var(--glass-bg-subtle) !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
@@ -900,16 +911,22 @@ table {
   overflow: hidden;
 }
 
-table th {
+table:not(figure.highlight table) th {
   background: rgba(73,177,245,0.1) !important;
 }
 
 /* 代码块 */
 figure.highlight {
-  background: rgba(28,32,42,0.85) !important;
+  background: var(--hl-bg) !important;
   border: 1px solid rgba(255,255,255,0.06) !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
+}
+
+/* 修复：代码块内部 table 未撑满导致右侧露出灰底 */
+figure.highlight > table {
+  width: 100% !important;
+  min-width: 100% !important;
 }
 
 /* 行内代码 */

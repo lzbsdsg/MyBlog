@@ -16,25 +16,15 @@ avatar:
 
 disable_top_img: false
 
-# 默认顶部大图
+# 背景图 / 顶部大图 / 页脚图全部由 JS 随机选取，不在这里配置
 default_top_img: /images/picture1.png
-
-# 首页顶部大图
 index_img: /images/picture1.png
-
-# 归档页顶部大图
 archive_img: /images/picture1.png
-
-# 标签页顶部大图
 tag_img: /images/picture1.png
-
-# 分类页顶部大图
 category_img: /images/picture1.png
-
-# 页脚背景图
 footer_img: /images/picture1.png
 
-# 全站背景
+# 全站背景（空数组 = 元素存在但无内联图片，由 JS 接管）
 background: /images/picture1.png
 
 # 文章封面（已禁用）
@@ -54,8 +44,6 @@ error_404:
   enable: true
   subtitle: '页面走丢了~'
   background: /images/picture1.png
-
-# --------------------------------------
 # Index Page
 # --------------------------------------
 

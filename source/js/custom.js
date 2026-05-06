@@ -8,7 +8,7 @@
 
   // 确定性随机：同一个 seed 永远选同一张图
   function pickImage(seed) {
-    if (!IMG_POOL.length) return '/images/picture1.png';
+    if (!IMG_POOL.length) return '';
     const hash = ((seed * 2654435761) >>> 0) % IMG_POOL.length;
     return '/images/' + IMG_POOL[hash];
   }
@@ -22,23 +22,36 @@
   // 设置元素背景（自适应）
   function setBg(el, img) {
     if (!el) return;
+    if (!img) return;
     el.style.backgroundImage = 'url(' + img + ')';
     el.style.backgroundSize = 'cover';
     el.style.backgroundPosition = 'center center';
     el.style.backgroundRepeat = 'no-repeat';
+    fadeIn(el);
   }
 
   // 预加载图片，加载完成后再应用（避免跳动）
   function setBgPreload(el, img) {
     if (!el) return;
+    if (!img) return;
     var tester = new Image();
     tester.onload = function () {
       el.style.backgroundImage = 'url(' + img + ')';
       el.style.backgroundSize = 'cover';
       el.style.backgroundPosition = 'center center';
       el.style.backgroundRepeat = 'no-repeat';
+      fadeIn(el);
     };
     tester.src = img;
+  }
+
+  // 淡入元素（double-rAF 确保背景先以 opacity:0 绘制，再触发 CSS transition）
+  function fadeIn(el) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        el.style.opacity = '1';
+      });
+    });
   }
 
   // ---- 路径哈希（确定性，同一路径永远同图） ----
@@ -169,11 +182,13 @@
     fetch('/images/manifest.json')
       .then(function (r) { return r.json(); })
       .then(function (list) {
-        IMG_POOL = list;
+        IMG_POOL = (Array.isArray(list) ? list : []).filter(function (name) {
+          return name && name !== 'picture1.png';
+        });
         initWithManifest();
       })
       .catch(function () {
-        IMG_POOL = ['picture1.png'];
+        IMG_POOL = [];
         initWithManifest();
       });
   }
